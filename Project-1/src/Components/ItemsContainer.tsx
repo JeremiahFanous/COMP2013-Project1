@@ -1,5 +1,5 @@
 import ItemCard from "./ItemCard";
-import type { ClothingProduct } from "../data/data";
+import { type ClothingProduct } from "../data/data";
 
 interface ItemContainerProps {
   products: ClothingProduct[];

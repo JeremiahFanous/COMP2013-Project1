@@ -19,6 +19,7 @@ export default function ItemCard({
       <p>{color}</p>
       <p>{size}</p>
       <p>${price}</p>
+      <button></button>
     </div>
   );
 }
