@@ -9,8 +9,12 @@ export default function ItemCard({
   description,
   size,
   price,
+  quantity,
+  itemQuantity,
   handleQuantityChange,
+  handleOutOfStock,
 }: ItemCardFunctions) {
+  const outOfStock = handleOutOfStock(quantity);
   return (
     <div className="ItemCard">
       <img src={image} alt={name} />
@@ -21,8 +25,20 @@ export default function ItemCard({
       <p>{color}</p>
       <p>{size}</p>
       <p>${price}</p>
-      <button onClick={() => handleQuantityChange(id, 1)}>+</button>
-      <button onClick={() => handleQuantityChange(id, -1)}>-</button>
+      <p>{outOfStock ? "Out of Stock" : quantity}</p>\{" "}
+      <button
+        onClick={() => handleQuantityChange(id, 1)}
+        disabled={outOfStock || itemQuantity >= quantity}
+      >
+        +
+      </button>
+      <span>{itemQuantity}</span>
+      <button
+        onClick={() => handleQuantityChange(id, -1)}
+        disabled={itemQuantity === 0}
+      >
+        -
+      </button>
     </div>
   );
 }

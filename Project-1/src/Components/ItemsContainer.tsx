@@ -4,10 +4,12 @@ import type { ClothingProduct } from "../data/data";
 interface ItemsContainerProps {
   products: ClothingProduct[];
   handleQuantityChange: (id: number, delta: number) => void;
+  handleOutOfStock: (quantity: number) => boolean;
 }
-export default function ItemsContainerProps({
+export default function ItemsContainer({
   products,
   handleQuantityChange,
+  handleOutOfStock,
 }: ItemsContainerProps) {
   return (
     <div className="ItemsContainer">
@@ -16,6 +18,7 @@ export default function ItemsContainerProps({
           key={product.id}
           {...product}
           handleQuantityChange={handleQuantityChange}
+          handleOutOfStock={handleOutOfStock}
         />
       ))}
     </div>
