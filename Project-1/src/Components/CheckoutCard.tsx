@@ -11,7 +11,7 @@ export default function CheckoutCard({
       <img src={image} alt={name} />
       <p>${price}</p>
       <p>{quantity}</p>
-      <p>Subtotal: $({price * quantity}).toFixed(2)</p>
+      <p>Subtotal: ${price * quantity}</p>
     </div>
   );
 }
