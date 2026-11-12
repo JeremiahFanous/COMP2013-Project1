@@ -5,11 +5,13 @@ interface ItemsContainerProps {
   products: ClothingProduct[];
   handleQuantityChange: (id: number, delta: number) => void;
   handleOutOfStock: (quantity: number) => boolean;
+  handleAddToCart: (id: number) => void;
 }
 export default function ItemsContainer({
   products,
   handleQuantityChange,
   handleOutOfStock,
+  handleAddToCart,
 }: ItemsContainerProps) {
   return (
     <div className="ItemsContainer">
@@ -19,6 +21,7 @@ export default function ItemsContainer({
           {...product}
           handleQuantityChange={handleQuantityChange}
           handleOutOfStock={handleOutOfStock}
+          handleAddToCart={handleAddToCart}
         />
       ))}
     </div>

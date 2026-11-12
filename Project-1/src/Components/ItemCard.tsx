@@ -13,6 +13,7 @@ export default function ItemCard({
   itemQuantity,
   handleQuantityChange,
   handleOutOfStock,
+  handleAddToCart,
 }: ItemCardFunctions) {
   const outOfStock = handleOutOfStock(quantity);
   return (
@@ -25,7 +26,7 @@ export default function ItemCard({
       <p>{color}</p>
       <p>{size}</p>
       <p>${price}</p>
-      <p>{outOfStock ? "Out of Stock" : quantity}</p>\{" "}
+      <p>{outOfStock ? "Out of Stock" : quantity}</p>
       <button
         onClick={() => handleQuantityChange(id, 1)}
         disabled={outOfStock || itemQuantity >= quantity}
@@ -38,6 +39,10 @@ export default function ItemCard({
         disabled={itemQuantity === 0}
       >
         -
+      </button>
+      <br></br>
+      <button onClick={() => handleAddToCart(id)} disabled={itemQuantity === 0}>
+        Add to Cart
       </button>
     </div>
   );
