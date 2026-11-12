@@ -24,9 +24,9 @@ export default function ItemCard({
       <p>{fit}</p>
       <p>{category}</p>
       <p>{color}</p>
-      <p>{size}</p>
-      <p>${price}</p>
-      <p>{outOfStock ? "Out of Stock" : quantity}</p>
+      <p>Size: {size}</p>
+      <p>Price: ${price}</p>
+      <p>{outOfStock ? "Out of Stock" : "Quantity: " + quantity}</p>
       <button
         onClick={() => handleQuantityChange(id, 1)}
         disabled={outOfStock || itemQuantity >= quantity}
@@ -40,7 +40,7 @@ export default function ItemCard({
       >
         -
       </button>
-      <br></br>
+      <br />
       <button onClick={() => handleAddToCart(id)} disabled={itemQuantity === 0}>
         Add to Cart
       </button>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import NavBar from "./NavBar";
 import CheckoutContainer from "./CheckoutContainer";
 import ItemsContainer from "./ItemsContainer";
 import { products, type ClothingProduct } from "../data/data";
@@ -67,14 +68,15 @@ export default function ThriftHappens() {
 
   //Main Return
   return (
-    <div className="StoreLayout">
+    <div>
+      <NavBar />
+      <CheckoutContainer cartItems={cartItems} />
       <ItemsContainer
         products={items}
         handleQuantityChange={handleQuantityChange}
         handleOutOfStock={handleOutOfStock}
         handleAddToCart={handleAddToCart}
       />
-      <CheckoutContainer cartItems={cartItems} />
     </div>
   );
 }
