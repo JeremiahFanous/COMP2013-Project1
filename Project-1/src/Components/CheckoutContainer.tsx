@@ -3,10 +3,14 @@ import { type ClothingProduct } from "../data/data";
 
 interface CheckoutContainerProps {
   cartItems: ClothingProduct[];
+  handleRemoveFromCart: (id: number) => void;
+  handleEmptyCheckout: () => void;
 }
 
 export default function CheckoutContainer({
   cartItems,
+  handleRemoveFromCart,
+  handleEmptyCheckout,
 }: CheckoutContainerProps) {
   const grandTotal = cartItems.reduce(
     (total, item) => total + item.price * item.itemQuantity,
@@ -20,9 +24,14 @@ export default function CheckoutContainer({
       ) : (
         <>
           {cartItems.map((cartItem) => (
-            <CheckoutCard key={cartItem.id} {...cartItem} />
+            <CheckoutCard
+              key={cartItem.id}
+              {...cartItem}
+              handleRemoveFromCart={handleRemoveFromCart}
+            />
           ))}
           <h3>Grand Total: ${grandTotal.toFixed(2)}</h3>
+          <button onClick={handleEmptyCheckout}>Empty Checkout</button>
         </>
       )}
     </div>

@@ -16,6 +16,8 @@ export default function ThriftHappens() {
   const [cartItems, setCartItems] = useState<ClothingProduct[]>([]);
 
   //Handlers
+
+  //1.
   function handleQuantityChange(id: number, delta: number) {
     setItems((prevItems) => {
       return prevItems.map((item) =>
@@ -32,10 +34,12 @@ export default function ThriftHappens() {
     });
   }
 
+  //2.
   function handleOutOfStock(quantity: number) {
     return quantity === 0;
   }
 
+  //3.
   function handleAddToCart(id: number) {
     const targetItem = items.find((item) => item.id === id);
 
@@ -66,11 +70,49 @@ export default function ThriftHappens() {
     );
   }
 
+  //5.
+  function handleRemoveFromCart(id: number) {
+    const itemToRemove = cartItems.find((cartItem) => cartItem.id === id);
+    if (!itemToRemove) return;
+    const restoreAmount = itemToRemove.itemQuantity;
+
+    setCartItems((prevCart) =>
+      prevCart.filter((cartItem) => cartItem.id !== id),
+    );
+
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id
+          ? { ...item, quantity: item.quantity + restoreAmount }
+          : item,
+      ),
+    );
+  }
+
+  //6.
+  function handleEmptyCheckout() {
+    setItems((prevItems) =>
+      prevItems.map((item) => {
+        const itemInCart = cartItems.find(
+          (cartItem) => cartItem.id === item.id,
+        );
+        return itemInCart
+          ? { ...item, quantity: item.quantity + itemInCart.itemQuantity }
+          : item;
+      }),
+    );
+    setCartItems([]);
+  }
+
   //Main Return
   return (
     <div>
       <NavBar />
-      <CheckoutContainer cartItems={cartItems} />
+      <CheckoutContainer
+        cartItems={cartItems}
+        handleRemoveFromCart={handleRemoveFromCart}
+        handleEmptyCheckout={handleEmptyCheckout}
+      />
       <ItemsContainer
         products={items}
         handleQuantityChange={handleQuantityChange}
