@@ -17,7 +17,7 @@ export default function ThriftHappens() {
 
   //Handlers
 
-  //1.
+  //1. Updates the items selected quantity and makes sure its between zero and the total stock available
   function handleQuantityChange(id: number, delta: number) {
     setItems((prevItems) => {
       return prevItems.map((item) =>
@@ -34,12 +34,12 @@ export default function ThriftHappens() {
     });
   }
 
-  //2.
+  //2. Checks to see if an items stock is empty
   function handleOutOfStock(quantity: number) {
     return quantity === 0;
   }
 
-  //3.
+  //3. Adds selected quantity to either existing item or new item, removes selected quantity from inventory and resets counter to 0
   function handleAddToCart(id: number) {
     const targetItem = items.find((item) => item.id === id);
 
@@ -70,7 +70,7 @@ export default function ThriftHappens() {
     );
   }
 
-  //5.
+  //4. Deletes specific product from checkout and restores the quantity selected back to available stock
   function handleRemoveFromCart(id: number) {
     const itemToRemove = cartItems.find((cartItem) => cartItem.id === id);
     if (!itemToRemove) return;
@@ -89,7 +89,7 @@ export default function ThriftHappens() {
     );
   }
 
-  //6.
+  //5. Clears all items from cart and restores all quantities back to available inventory
   function handleEmptyCheckout() {
     setItems((prevItems) =>
       prevItems.map((item) => {
